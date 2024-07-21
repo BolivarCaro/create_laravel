@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('edad');
             $table->string('documento');
             $table->string('email');
+            $table->string('imagen');
+
         });
     }
 

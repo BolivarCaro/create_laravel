@@ -12,7 +12,8 @@ class RegistrosController extends Controller
      */
     public function index()
     {
-        //
+        $record = Registro::all();
+        return view('registros.index', compact('record'));
     }
 
     /**
@@ -34,6 +35,9 @@ class RegistrosController extends Controller
         $record -> edad = $request -> input('edad');
         $record -> documento = $request -> input('documento');
         $record -> email = $request -> input('email');
+        if($request->hasFile('imagen')){
+            $record->imagen = $request->file('imagen')->store('public/registros');
+        }
         $record->save();
         return 'creado exitosamente...';
     }
@@ -43,7 +47,9 @@ class RegistrosController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $record = Registro::find($id);
+        return view('registros.show', compact('record'));
+
     }
 
     /**

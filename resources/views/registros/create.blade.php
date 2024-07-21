@@ -11,7 +11,7 @@
                         <h3>Registro</h3>
                     </div>
                     <div class="card-body">
-                        <form action="/registro" method="POST">
+                        <form action="/registro" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="nombre" class="form-label" style="color: #001F3F;">Nombre</label>
@@ -39,6 +39,10 @@
                                     style="border: 2px solid #ccc; background-color: #f9f9f9;">
                             </div>
                             <div class="d-grid gap-2">
+                                <label for="imagen" class="form-label" style="color: #001F3F;">Cargar imagen</label>
+                                <input type="file" name="imagen" class="form-control" id="imagen"
+                                    style="border: 2px solid #001F3F; padding: 5px;">
+
                                 <button type="submit" class="btn btn-lg"
                                     style="background-color: #2ECC40; color: white;">Crear</button>
                             </div>
