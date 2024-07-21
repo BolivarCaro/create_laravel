@@ -35,7 +35,7 @@ class RegistrosController extends Controller
         $record -> documento = $request -> input('documento');
         $record -> email = $request -> input('email');
         $record->save();
-        return 'creado exitosamente';
+        return 'creado exitosamente...';
     }
 
     /**
