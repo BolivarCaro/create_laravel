@@ -1,32 +1,51 @@
-@extends('layout.app')
-@section('title')
+@extends('layouts.app')
+
+@section('title', 'Registro')
+
 @section('content')
-
-    <form action="/registro" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg rounded-3">
+                    <div class="card-header text-center" style="background-color: #001F3F; color: white;">
+                        <h3>Registro</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/registro" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label" style="color: #001F3F;">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                    style="border: 2px solid #ccc; background-color: #f9f9f9;">
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellido" class="form-label" style="color: #001F3F;">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido"
+                                    style="border: 2px solid #ccc; background-color: #f9f9f9;">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edad" class="form-label" style="color: #001F3F;">Edad</label>
+                                <input type="number" class="form-control" id="edad" name="edad"
+                                    style="border: 2px solid #ccc; background-color: #f9f9f9;">
+                            </div>
+                            <div class="mb-3">
+                                <label for="documento" class="form-label" style="color: #001F3F;">Documento</label>
+                                <input type="text" class="form-control" id="documento" name="documento"
+                                    style="border: 2px solid #ccc; background-color: #f9f9f9;">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label" style="color: #001F3F;">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    style="border: 2px solid #ccc; background-color: #f9f9f9;">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-lg"
+                                    style="background-color: #2ECC40; color: white;">Crear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido">
-        </div>
-        <div class="mb-3">
-            <label for="edad" class="form-label">Edad</label>
-            <input type="number" class="form-control" id="edad" name="edad">
-        </div>
-        <div class="mb-3">
-            <label for="documento" class="form-label">Documento</label>
-            <input type="text" class="form-control" id="documento" name="documento">
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email">
-        </div>
-
-
-        <button type="submit" class="btn btn-primary">Crear</button>
-    </form>
-
+    </div>
 @endsection
