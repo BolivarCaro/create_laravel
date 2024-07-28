@@ -57,7 +57,8 @@ class RegistrosController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $record = Registro::find($id);
+        return view('registros.edit', compact('record'));
     }
 
     /**
@@ -65,7 +66,13 @@ class RegistrosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $record = Registro::find($id);
+        $record->fill($request->except('imagen'));
+        if ($request->hasFile('imagen')){
+            $record->imagen = $request->file('imagen')->store('public/registros');
+            $record->save();
+            return 'Registro Actualizado';
+        }
     }
 
     /**
@@ -73,6 +80,12 @@ class RegistrosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $record = Registro::find($id);
+        if(!$record){
+            return redirect()->route('registro.index')->with('error', 'Registro no encontrado.');
+
+        }
+        $record->delete();
+        return redirect()->route('registro.index')->with('success', 'Registro eliminado correctamente.');
     }
 }
