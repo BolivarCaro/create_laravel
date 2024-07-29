@@ -40,13 +40,26 @@
         body {
             background-color: #f8f9fa;
         }
+
+        .navbar-brand img {
+            height: 40px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+            transition: transform 0.3s ease; /* Transición */
+        }
+
+        .navbar-brand img:hover {
+            transform: scale(1.1); /* Escalar el logo al pasar el mouse */
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">SENA</a>
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('storage/registros/logoecenvios.png') }}" alt="Logo de la empresa">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
