@@ -9,8 +9,8 @@ class Cliente extends Model
 {
     use HasFactory;
 
-    protected $table ='cliente';
-    protected $fillable = ['nombre','apellido','email','telefono','direccion','ciudad','departamento','codigo_postal','fecha_ingreso','ultimo_ingreso','observaciones'];
+    protected $table ='clientes';
+    protected $fillable = ['nombre','apellido','document_type', 'document', 'email','telefono','direccion','ciudad','departamento','codigo_postal','fecha_recoleccion','observaciones'];
 
     public function envios()
     {

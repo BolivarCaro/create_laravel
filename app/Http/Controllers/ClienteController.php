@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -11,7 +12,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Cliente::all();
+        return view('registros.CustomerData', compact('customer'));
     }
 
     /**
@@ -19,7 +21,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('registros.CustomerData');
     }
 
     /**
@@ -27,7 +29,24 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'document_type' => 'required|string|max:10',
+            'document' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'telefono' => 'required|string|max:20',
+            'direccion' => 'required|string|max:255',
+            'ciudad' => 'required|string|max:100',
+            'departamento' => 'required|string|max:100',
+            'codigo_postal' => 'required|string|max:20',
+            'fecha_recoleccion' => 'required|date',
+            'observaciones' => 'nullable|string',
+        ]);
+
+        Cliente::create($validatedData);
+
+        return redirect('/')->with('success', 'Cliente creado exitosamente');
     }
 
     /**

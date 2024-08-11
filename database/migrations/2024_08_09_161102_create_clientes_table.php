@@ -16,14 +16,15 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('apellido');
+            $table->string('document_type');
+            $table->string('document');
             $table->string('email');
             $table->string('telefono');
             $table->string('direccion');
             $table->string('ciudad');
             $table->string('departamento');
             $table->string('codigo_postal');
-            $table->date('fecha_ingreso');
-            $table->date('ultimo_ingreso');
+            $table->date('fecha_recoleccion');
             $table->string('observaciones');
 
         });
