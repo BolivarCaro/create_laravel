@@ -18,9 +18,9 @@
                     <x-nav-link :href="route('CustomerData')" :active="request()->routeIs('CustomerData')">
                         {{ __('Shipping Service') }}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('registro.index')" :active="request()->routeIs('registro.index')">
-                        {{ __('Servicios de Envio')}}
-                    </x-nav-link> --}}
+                    <x-nav-link :href="route('registro.index')" :active="request()->routeIs('registro.index')">
+                        {{ __('Registros')}}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -95,6 +95,11 @@
                                     style="background-color: #2ECC40; color: #FFFFFF;">Siguiente</button>
                             </div>
                         </form>
+                        {{-- formulario del destinatario --}}
+                        {{-- <div id="formDestinatario" style="display: none">
+                            <h3 style="color: #001F3F">Informacion del destinatario</h3>
+
+                        </div> --}}
                     </div> <!-- Cierre del div card-body -->
                 </div>
             </div>

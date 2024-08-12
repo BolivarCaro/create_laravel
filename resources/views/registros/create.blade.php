@@ -1,11 +1,13 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Registro') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Registro')
-
-@section('content')
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6"> <!-- El formulario ocupa la mitad de la pantalla -->
                 <div class="card shadow-lg rounded-3">
                     <div class="card-header text-center" style="background-color: #001F3F; color: white;">
                         <h3>Registro</h3>
@@ -52,4 +54,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>
