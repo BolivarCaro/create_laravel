@@ -28,13 +28,25 @@ class RegistrosController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+
+   { //validaciones
+    $validatedData = $request->validate([
+        'nombre' => 'required|string|alpha|max:255',
+        'apellido' => 'required|string|alpha|max:255',
+        'edad' => 'required|integer|min:18|max:100',
+        'documento' => 'required|string|regex:/^[0-9]{8,10}$/',
+        'email' => 'required|email|max:255',
+        'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
+    ]);
+
         $record = new registro();
-        $record -> nombre = $request ->input('nombre');
-        $record -> apellido = $request -> input('apellido');
-        $record -> edad = $request -> input('edad');
-        $record -> documento = $request -> input('documento');
-        $record -> email = $request -> input('email');
+        $record -> nombre = $validatedData[ 'nombre' ];
+        $record -> apellido = $validatedData[ 'apellido' ];
+        $record -> edad = $validatedData[ 'edad' ];
+        $record -> documento = $validatedData[ 'documento' ];
+        $record -> email = $validatedData[ 'email' ];
+
         if($request->hasFile('imagen')){
             $record->imagen = $request->file('imagen')->store('public/registros');
         }
@@ -65,15 +77,37 @@ class RegistrosController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $record = Registro::find($id);
-        $record->fill($request->except('imagen'));
-        if ($request->hasFile('imagen')){
-            $record->imagen = $request->file('imagen')->store('public/registros');
-            $record->save();
-            return 'Registro Actualizado';
+        {
+            $record = Registro::find($id);
+
+            //validaciones
+            $validatedData = $request->validate([
+                'nombre' => 'required|string|alpha|max:255',
+                'apellido' => 'required|string|alpha|max:255',
+                'edad' => 'required|integer|min:18|max:100',
+                'documento' => 'required|string|regex:/^[0-9]{8,10}$/',
+                'email' => 'required|email|max:255',
+                'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+
+            //rellenar los datos validos
+            $record->fill($validatedData);
+
+            //Encontrar registro a actuaizar
+            $record->nombre = $validatedData['nombre'];
+            $record->apellido = $validatedData['apellido'];
+            $record->edad = $validatedData['edad'];
+            $record->documento = $validatedData['documento'];
+            $record->email = $validatedData['email'];
+
+            if ($request->hasFile('imagen')) {
+                $record->imagen = $request->file('imagen')->store('public/registros');
+            }
+            //guardar los cambios
+            $record -> save();
+
+            return redirect()->route( 'registro.index' )->with('success', 'Registro actualizado correctamente');
         }
-    }
 
     /**
      * Remove the specified resource from storage.

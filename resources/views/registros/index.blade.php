@@ -6,6 +6,13 @@
     @endslot
 
     <div class="container mt-5">
+        <!-- Mensaje de éxito -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <h3 class="text-center mb-4">Listado de registros disponibles</h3>
         <div class="row justify-content-center">
             @foreach ($record as $records)
@@ -19,7 +26,7 @@
                             <p class="card-text">{{ $records->edad }} años</p>
                             <p class="card-text">{{ $records->documento }}</p>
                             <p class="card-text">{{ $records->email }}</p>
-                            <a href="/registro/{{ $records->id }}" class="btn btn-custom mt-3">Ver detalles</a>
+                            <a href="{{ route('registro.edit', $records->id) }}" class="btn btn-custom mt-3">Editar</a>
                         </div>
                     </div>
                 </div>
