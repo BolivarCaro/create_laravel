@@ -10,10 +10,10 @@ class Cliente extends Model
     use HasFactory;
 
     protected $table ='clientes';
-    protected $fillable = ['nombre','apellido','document_type', 'document', 'email','telefono','direccion','ciudad','departamento','codigo_postal','fecha_recoleccion','observaciones'];
+    protected $fillable = ['nombre','apellido','document_type', 'document', 'email','telefono','direccion','ciudad','departamento','codigo_postal','fecha_recoleccion','hora_recogida','observaciones'];
 
-    public function envios()
+    public function recipients()
     {
-        return $this->hasMany(Envio::class, 'id_cliente');
+        return $this->hasMany(Recipient::class, 'id_cliente');
     }
 }

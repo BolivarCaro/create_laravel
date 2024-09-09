@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecipientController;
+use App\Http\Controllers\RecipientData;
 use App\Http\Controllers\RegistrosController;
+use App\Models\Recipient;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,9 +16,14 @@ Route::resource('/registro', RegistrosController::class);
 
 
 
-
+//rutas de remitente
 Route::get('/CustomerData', [ClienteController::class, 'index'])->name('CustomerData.index');
 Route::post('/CustomerData', [ClienteController::class, 'store'])->name('CustomerData.store');
+
+//rutas de destinatario
+Route::get('/RecipientData', [RecipientController::class, 'index'])->name('RecipientData.index');
+Route::post('/RecipientData', [RecipientController::class, 'store'])->name('RecipientData.store');
+
 
 
 

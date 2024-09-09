@@ -30,24 +30,45 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'document_type' => 'required|string|max:10',
-            'document' => 'required|string|max:255',
+            'nombre' => 'required|string|alpha|max:255',
+            'apellido' => 'required|string|alpha|max:255',
+            'document_type' => 'required|in:cc,ti,ce,pasaporte',
+            'document' => 'required|string|regex:/^[0-9]{8,10}$/',
             'email' => 'required|email|max:255',
-            'telefono' => 'required|string|max:20',
+            'telefono' => 'required|string|regex:/^\+?[0-9]{10}$/',
             'direccion' => 'required|string|max:255',
-            'ciudad' => 'required|string|max:100',
-            'departamento' => 'required|string|max:100',
-            'codigo_postal' => 'required|string|max:20',
-            'fecha_recoleccion' => 'required|date',
-            'observaciones' => 'nullable|string',
+            'ciudad' => 'required|string|alpha|max:255',
+            'departamento' => 'required|string|alpha|max:255',
+            'codigo_postal' => 'required|string|regex:/^[0-9]{6}$/',
+            'fecha_recoleccion' => 'required|date|after_or_equal:today',
+            'hora_recogida' => 'required|in:manana,tarde',
+            'observaciones' => 'nullable|string|max:500',
         ]);
 
-        Cliente::create($validatedData);
+        $customer = new Cliente();
+        $customer->nombre = $validatedData['nombre'];
+        $customer->apellido = $validatedData['apellido'];
+        $customer->document_type = $validatedData['document_type'];
+        $customer->document = $validatedData['document'];
+        $customer->email = $validatedData['email'];
+        $customer->telefono = $validatedData['telefono'];
+        $customer->direccion = $validatedData['direccion'];
+        $customer->ciudad = $validatedData['ciudad'];
+        $customer->departamento = $validatedData['departamento'];
+        $customer->codigo_postal = $validatedData['codigo_postal'];
+        $customer->fecha_recoleccion = $validatedData['fecha_recoleccion'];
+        $customer->hora_recogida = $validatedData['hora_recogida'];
+        $customer->observaciones = $validatedData['observaciones'];
 
-        return redirect('/')->with('success', 'Cliente creado exitosamente');
+        $customer -> fill($validatedData);
+        $customer->save();
+
+        session() -> put( 'id_cliente', $customer -> id );
+
+
+        return redirect()->route('RecipientData.index');
     }
+
 
     /**
      * Display the specified resource.

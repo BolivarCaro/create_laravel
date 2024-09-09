@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('departamento');
             $table->string('codigo_postal');
             $table->date('fecha_recoleccion');
+            $table->string('hora_recogida');
             $table->string('observaciones');
 
         });
